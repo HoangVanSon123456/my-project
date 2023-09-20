@@ -23,26 +23,21 @@ export default function FormLogin() {
   });
 
   const loginUser = (data: User) => {
-    if (data.email == "" && data.password == "12345678") {
+    if (data.email == "abc@gmail.com" && data.password == "12345678") {
       router.push("/");
     }
   };
 
   return (
     <>
-      <form className="" onSubmit={handleSubmit(loginUser)}>
+      <form onSubmit={handleSubmit(loginUser)}>
         <div className="relative">
           <input
             type="text"
             id="floating_outlined"
-            className={classNames(
-              "shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline hover:bg-blue-100",
-              {
-                "is-invalid": Boolean(errors?.password?.message),
-              }
-            )}
+            className="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline hover:bg-blue-100"
             placeholder=" "
-            {...register("password")}
+            {...register("email")}
           />
           <label
             htmlFor="floating_outlined"
@@ -50,6 +45,7 @@ export default function FormLogin() {
           >
             Address Email
           </label>
+          <p className="text-red-500">{errors.email?.message}</p>
         </div>
         <div className="mt-2">
           <div className="relative">
@@ -59,7 +55,7 @@ export default function FormLogin() {
               className={classNames(
                 "shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline hover:bg-blue-100",
                 {
-                  "is-invalid": Boolean(errors?.password?.message),
+                  "is-invalid": Boolean(errors?.email?.message),
                 }
               )}
               placeholder=" "
@@ -75,7 +71,7 @@ export default function FormLogin() {
           <p className="text-red-500">{errors.password?.message}</p>
         </div>
         <div className="text-right mb-8 font-light text-sm">
-          <a>Forgot password?</a>
+          <a href="/forgotpassword">Forgot password?</a>
         </div>
 
         <div className="flex items-center justify-between">

@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import FormLogin from "./pageFormLogin";
 import imageLogin from "./image.png";

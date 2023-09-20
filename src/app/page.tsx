@@ -1,8 +1,10 @@
+import AppTable from "./components/app.table";
+
 export default function Home() {
   return (
     <>
       <div>
-        <h1>hello</h1>
+        <AppTable />
       </div>
     </>
   );
