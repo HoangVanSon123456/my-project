@@ -10,8 +10,16 @@ export default function FormLogin() {
   const router = useRouter();
 
   const validateScheme = Yup.object().shape({
-    email: Yup.string().email().required(),
-    password: Yup.string().min(8).max(32).required(),
+    email: Yup.string()
+      .email()
+      .matches(/^(?!.*@[^,]*,)/)
+      .required("Please Enter your Email"),
+    password: Yup.string()
+      .required("Please Enter your password")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      ),
   });
 
   const {
@@ -23,8 +31,10 @@ export default function FormLogin() {
   });
 
   const loginUser = (data: User) => {
-    if (data.email == "abc@gmail.com" && data.password == "12345678") {
+    if (data.email == "abc@gmail.com" && data.password == "Abc@123456") {
       router.push("/");
+    } else {
+      alert("Đăng nhập thất bại");
     }
   };
 
@@ -41,7 +51,7 @@ export default function FormLogin() {
           />
           <label
             htmlFor="floating_outlined"
-            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+            className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0]  dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
           >
             Address Email
           </label>
@@ -63,7 +73,7 @@ export default function FormLogin() {
             />
             <label
               htmlFor="floating_outlined"
-              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
+              className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] dark:bg-gray-900 px-2 peer-focus:px-2 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1"
             >
               Password
             </label>
