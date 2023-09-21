@@ -1,49 +1,36 @@
 "use client";
 import { useForm } from "react-hook-form";
-import * as Yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { User } from "@/types/User";
 import { useRouter } from "next/navigation";
-import classNames from "classnames";
-import { useState } from "react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export default function FormLogin() {
-  const [show, setShow] = useState(false);
-
+export default function TestFormLogin() {
   const router = useRouter();
 
-  const validateScheme = Yup.object().shape({
-    email: Yup.string()
-      .email()
-      .matches(/^(?!.*@[^,]*,)/)
-      .required("Please Enter your Email"),
-    password: Yup.string()
-      .required("Please Enter your password")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
-      ),
+  const validateScheme = z.object({
+    email: z
+      .string()
+      .min(1, { message: "This field has to be filled." })
+      .email("This is not a valid email."),
+    password: z.string().min(6),
   });
+
+  type validateSchemeType = z.infer<typeof validateScheme>;
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validateScheme),
-  });
+  } = useForm<validateSchemeType>({ resolver: zodResolver(validateScheme) });
 
-  const loginUser = async (data: User) => {
+  const loginUser = (data: User) => {
     if (data.email == "abc@gmail.com" && data.password == "Abc@123456") {
-      await router.push("/");
+      router.push("/");
       console.log({ data });
     } else {
       alert("Sign in failed");
     }
-  };
-
-  const closeModal = () => {
-    setShow(false);
   };
 
   return (
@@ -53,7 +40,7 @@ export default function FormLogin() {
           <input
             type="text"
             id="floating_outlined"
-            className="s appearance-none border rounded w-full py-4 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline hover:bg-green-100"
+            className="s appearance-none border rounded w-full py-4 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline hover:bg-blue-100"
             placeholder=" "
             {...register("email")}
           />
@@ -69,11 +56,11 @@ export default function FormLogin() {
             </span>
           )}
         </div>
-        <div className="relative mt-4">
+        <div className="relative mt-2">
           <input
             type="text"
             id="floating_outlined"
-            className="shadow appearance-none w-full py-4 px-3 text-gray-700 leading-tight  border rounded focus:outline-none focus:shadow-outline hover:bg-green-100"
+            className="shadow appearance-none border rounded w-full py-4 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline hover:bg-blue-100"
             placeholder=" "
             {...register("password")}
           />
@@ -83,29 +70,15 @@ export default function FormLogin() {
           >
             Password
           </label>
+
           {errors.password?.message && (
-            <span className="text-red-500 text-xs">
-              {errors.password?.message}
-            </span>
+            <p className="text-sm text-red-400">{errors.password.message}</p>
           )}
         </div>
-        <div className="text-right mb-4 font-light text-xs italic text-sky-900 mt-1">
-          <button type="button" onClick={() => setShow(!show)}>
-            Forgot Password
-          </button>
+        <div className="text-right mb-4 font-light text-xs italic text-sky-900">
+          <a href="/forgotpassword">Forgot password?</a>
         </div>
-        <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-          <div className="w-[600px] flex flex-col">
-            <button
-              className="text-white text-xl place-self-end"
-              onClick={closeModal}
-              type="submit"
-            >
-              X
-            </button>
-            <div className="bg-white p-2">Modal</div>
-          </div>
-        </div>
+
         <div className="flex items-center justify-between">
           <button
             className="bg-sky-900 hover:bg-blue-700 text-white font-serif py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"

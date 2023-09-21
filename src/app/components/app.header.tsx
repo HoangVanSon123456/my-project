@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -9,19 +10,23 @@ export default function AppHeader() {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Brand>
+            <Link href={"/"} className="navbar-brand">
+              Home
+            </Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/facebook" className="nav-link">
+              <Link href="/facebook" className="nav-link">
                 Facebook
-              </Nav.Link>
-              <Nav.Link href="/youtube" className="nav-link">
+              </Link>
+              <Link href="/youtube" className="nav-link">
                 Youtube
-              </Nav.Link>
-              <Nav.Link href="/tiktok" className="nav-link">
+              </Link>
+              <Link href="/tiktok" className="nav-link">
                 Tiktok
-              </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
