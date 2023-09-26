@@ -5,6 +5,7 @@ import Germany from "../../../public/germany.svg";
 import Italy from "../../../public/italy.svg";
 import { useState } from "react";
 import classNames from "classnames";
+import { relative } from "path";
 
 export default function PageLanguage() {
   const [show, setShow] = useState(false);
@@ -13,7 +14,7 @@ export default function PageLanguage() {
     <>
       <button
         data-dropdown-toggle="dropdown-states"
-        className="inline-flex items-center py-2.5 px-4 text-sm font-medium text-center relative"
+        className="inline-flex items-center text-sm font-medium text-end"
         type="button"
         onClick={() => setShow(!show)}
       >
@@ -23,19 +24,19 @@ export default function PageLanguage() {
       </button>
       <div
         className={classNames(
-          "bg-white divide-y divide-gray-100 rounded-lg shadow w-32 px-2 dark:bg-gray-700 ml-80 absolute",
+          " bg-slate-50 divide-y divide-gray-100 rounded-lg w-30 shadow-2xl px-2 dark:bg-gray-700 ml-[340px]",
           { show }
         )}
         style={{ display: show ? "block" : "none" }}
       >
-        <ul
-          className="py-2 text-sm text-gray-700 dark:text-gray-200"
+        {/* <ul
+          className=" text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="states-button"
         >
           <li>
             <button
               type="button"
-              className="inline-flex w-full mx-2 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
+              className="inline-flex w-full mx-2 py-1 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-600 dark:hover:text-white"
             >
               <div className="inline-flex items-center">
                 <Image src={Germany} alt="" className="mr-2" />
@@ -54,7 +55,7 @@ export default function PageLanguage() {
               </div>
             </button>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </>
   );

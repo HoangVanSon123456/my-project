@@ -4,8 +4,6 @@ import FormLogin from "./pageFormLogin";
 import ImageLogin from "./image.png";
 import Google from "../../../public/google.svg";
 import Apple from "../../../public/apple.svg";
-
-import TestFormLogin from "./testFormZodValidate";
 import PageLanguage from "./pageLanguage";
 
 export default function Login() {
@@ -23,7 +21,7 @@ export default function Login() {
             width={580}
             style={{ height: "600px" }}
           />
-          <div className="absolute inset-0 bg-sky-900 bg-opacity-50 p-2 bg-black">
+          <div className="absolute inset-0 bg-sky-900 bg-opacity-50 p-2 ">
             <div className="text-left text-white mt-40 mx-16 leading-9">
               Lorem ipsum dolor sit amet consectetur. Ultrices faucibus sed nisi
               eget mattis viverra sit at in. Duis tempus sit nunc ornare. Quis
@@ -35,16 +33,15 @@ export default function Login() {
           </div>
         </div>
         <div className="rounded-tr-lg rounded-br-lg bg-white">
-          <div className="mx-14">
-            <div className="mt-4 mb-4 text-end">
+          <div className="mx-14 mt-10">
+            <div className="mt-8 mb-4 text-end">
               <PageLanguage />
             </div>
-            <p className="font-semibold text-xl mb-6">Welcome to Apolio</p>
+            <p className="font-semibold text-xl mb-6">Welcome to Apodio</p>
             <FormLogin />
-            {/* <TestFormLogin /> */}
             <div className="inline-flex items-center justify-center w-full mt-20">
-              <hr className="w-full h-px my-8 bg-gray-200 border-0 dark:bg-gray-700" />
-              <span className="absolute px-3 italic font-medium text-gray-900 bg-white">
+              <hr className=" w-full h-px my-8 bg-gray-200 border-0 dark:bg-gray-700 ml-8" />
+              <span className="relative px-3 italic font-medium text-gray-900 bg-white right-56">
                 or
               </span>
             </div>
