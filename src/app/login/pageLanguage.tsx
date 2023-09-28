@@ -14,7 +14,7 @@ export default function PageLanguage() {
     <>
       <button
         data-dropdown-toggle="dropdown-states"
-        className="inline-flex items-center text-sm font-medium text-end"
+        className="relative inline-flex items-center text-sm font-medium text-end"
         type="button"
         onClick={() => setShow(!show)}
       >
@@ -24,13 +24,13 @@ export default function PageLanguage() {
       </button>
       <div
         className={classNames(
-          " bg-slate-50 divide-y divide-gray-100 rounded-lg w-30 shadow-2xl px-2 dark:bg-gray-700 ml-[340px]",
+          "absolute bg-slate-50  divide-y divide-gray-100 rounded-lg w-30 shadow-2xl px-2 dark:bg-gray-700 ml-[285px] mt-1",
           { show }
         )}
         style={{ display: show ? "block" : "none" }}
       >
-        {/* <ul
-          className=" text-sm text-gray-700 dark:text-gray-200"
+        <ul
+          className="text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="states-button"
         >
           <li>
@@ -55,7 +55,7 @@ export default function PageLanguage() {
               </div>
             </button>
           </li>
-        </ul> */}
+        </ul>
       </div>
     </>
   );

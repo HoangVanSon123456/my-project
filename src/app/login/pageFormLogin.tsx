@@ -7,6 +7,9 @@ import { useState } from "react";
 import { Button, IconButton, InputAdornment, TextField } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Google from "../../../public/google.svg";
+import Apple from "../../../public/apple.svg";
+import Image from "next/image";
 
 export default function FormLogin() {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,10 +44,9 @@ export default function FormLogin() {
     <>
       <form onSubmit={handleSubmit(loginUser)}>
         <TextField
-          className="pb-2"
+          className="pb-1"
           id="email"
           label="Address email"
-          focused
           autoComplete="email"
           fullWidth
           error={Boolean(errors.email)}
@@ -58,10 +60,11 @@ export default function FormLogin() {
           autoComplete="password"
           type={showPassword ? "text" : "password"}
           fullWidth
-          focused
           error={Boolean(errors.password)}
           helperText={errors.password ? errors.password.message : " "}
-          {...register("password")}
+          {...register("password", {
+            max: 7,
+          })}
           placeholder="Type your password"
           InputProps={{
             endAdornment: (
@@ -80,7 +83,7 @@ export default function FormLogin() {
         <Button
           type="button"
           variant="text"
-          className="text-neutral-500 ml-[278px] font-roboto normal-case -mt-6"
+          className="text-neutral-500 ml-[254px] font-roboto normal-case -mt-8"
         >
           forgot password
         </Button>
@@ -91,6 +94,29 @@ export default function FormLogin() {
         >
           Login
         </Button>
+        <div className="mt-32">
+          <div className="relative flex items-center mb-5">
+            <div className="flex-grow border-t border-gray-400"></div>
+            <span className="px-3 italic font-medium text-gray-900 bg-white right-56">
+              or
+            </span>
+            <div className="flex-grow border-t border-gray-400"></div>
+          </div>
+          <button
+            type="button"
+            className="w-full text-black bg-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 border border-gray-200 hover:bg-gray-200"
+          >
+            <Image src={Google} alt="" className="mx-2 ml-12" />
+            Sign in with your Google account
+          </button>
+          <button
+            type="button"
+            className="w-full text-black bg-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-2 mb-2 border border-gray-200 hover:bg-gray-200"
+          >
+            <Image src={Apple} alt="" className="mx-2 ml-12" />
+            Sign in with your Apple account
+          </button>
+        </div>
       </form>
     </>
   );
