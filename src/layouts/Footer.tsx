@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-type Props = {}
+type Props = {};
 
 export default function Footer({}: Props) {
   return (
-    <div>Footer</div>
-  )
+    <div className="flex mt-3 mx-5 justify-between">
+      <span className="italic">Công nghệ tiện ích</span>
+      <span>Công ty trách nhiệm hữu hạn</span>
+    </div>
+  );
 }
