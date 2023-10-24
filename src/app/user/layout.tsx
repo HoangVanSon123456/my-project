@@ -4,10 +4,8 @@ import "../globals.css";
 import type { Metadata } from "next";
 // import "bootstrap/dist/css/bootstrap.min.css";
 import { Inter } from "next/font/google";
-import { Container } from "react-bootstrap";
 import Navbar from "@/layouts/Navbar";
 import Footer from "@/layouts/Footer";
-import Layout from "@/layouts/Layout";
 
 const inter = Inter({ subsets: ["latin"] });
 

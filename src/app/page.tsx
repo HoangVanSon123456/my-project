@@ -1,5 +1,8 @@
 "use client";
+import Image from "next/image";
 import React from "react";
+import IconGoogle from "../../public/google.svg";
+import IconFaceBook from "../../public/icons8-facebook.svg";
 
 export default function Home() {
   return (
@@ -22,7 +25,7 @@ export default function Home() {
         <div className="flex justify-center self-center z-10">
           <div className="p-12 bg-white mx-auto rounded-2xl w-100">
             <div className="mb-4">
-              <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
+              <h3 className="font-semibold text-2xl text-gray-800">Sign In</h3>
               <p className="text-gray-500">Please sign in to your account.</p>
             </div>
             <div className="space-y-5">
@@ -75,18 +78,27 @@ export default function Home() {
                   Sign in
                 </button>
               </div>
+              <div className="relative flex items-center">
+                <div className="flex-grow border-t border-gray-400" />
+                <span className="flex-shrink mx-4 text-gray-400">or</span>
+                <div className="flex-grow border-t border-gray-400" />
+              </div>
             </div>
-            <div className="pt-5 text-center text-gray-400 text-xs">
+            <div className="flex gap-3 justify-center items-center">
+              <Image src={IconGoogle} alt="" width={42} height={42} />
+              <Image src={IconFaceBook} alt="" width={42} height={42} />
+            </div>
+            <div className="pt-5 text-center text-gray-400 text-sm">
               <span>
-                Copyright © 2021-2022
+                Copyright © 2021-2022/
                 <a
                   href="https://codepen.io/uidesignhub"
                   rel=""
                   target="_blank"
                   title="Ajimon"
-                  className="text-green hover:text-green-500 "
+                  className="text-green-950 hover:text-green-500 "
                 >
-                  AJI
+                  Register
                 </a>
               </span>
             </div>

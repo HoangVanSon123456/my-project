@@ -2,41 +2,46 @@
 import { Button, Menu, MenuItem } from "@mui/material";
 import React from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import EditIcon from "@mui/icons-material/Edit";
-import Divider from "@mui/material/Divider";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import FileCopyIcon from "@mui/icons-material/FileCopy";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import IconVietNam from "../../public/flag-for-vietnam-svgrepo-com.svg";
+import IconVietNam from "../../public/vietnam-flag-icon.svg";
+import IconEnglish from "../../public/united-kingdom-flag-icon.svg";
 import Image from "next/image";
 import ImageLogo from "../../public/full-m2H7K9N4A0d3Z5d3.png";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 type Props = {};
 
 export default function Header({}: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const [anchorE2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
+  const open2 = Boolean(anchorE2);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickLanguage = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl2(event.currentTarget);
+  };
+  const handleCloseLanguage = () => {
+    setAnchorEl2(null);
   };
   return (
     <>
       <div className="">
         <Button
           id="demo-customized-button"
-          aria-controls={open ? "demo-customized-menu" : undefined}
+          aria-controls={open2 ? "demo-customized-menu" : undefined}
           aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
+          aria-expanded={open2 ? "true" : undefined}
           variant="text"
           disableElevation
-          onClick={handleClick}
-          sx={{ color: "black" }}
+          onMouseEnter={handleClickLanguage}
         >
           <Image src={IconVietNam} alt="" width={30} height={30} />
         </Button>
@@ -45,21 +50,43 @@ export default function Header({}: Props) {
           MenuListProps={{
             "aria-labelledby": "demo-customized-button",
           }}
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          anchorEl={anchorE2}
+          open={open2}
+          onClick={handleCloseLanguage}
         >
-          <MenuItem onClick={handleClose} disableRipple>
-            <EditIcon />
-            Edit
+          <MenuItem
+            onClick={handleCloseLanguage}
+            disableRipple
+            style={{ fontSize: 15 }}
+          >
+            <Image
+              src={IconVietNam}
+              alt=""
+              width={30}
+              height={30}
+              style={{ marginRight: 8 }}
+            />
+            Việt Nam
           </MenuItem>
-          <MenuItem onClick={handleClose} disableRipple>
-            <FileCopyIcon />
-            Duplicate
+          <MenuItem
+            onClick={handleCloseLanguage}
+            disableRipple
+            style={{ fontSize: 15 }}
+          >
+            <Image
+              src={IconEnglish}
+              alt=""
+              width={30}
+              height={30}
+              style={{ marginRight: 8 }}
+            />
+            English
           </MenuItem>
         </Menu>
       </div>
-      <NotificationsActiveIcon style={{ marginRight: 10 }} />
+      <NotificationsActiveIcon style={{ marginRight: 13 }} />
       <div className="rounded-full">
         <Image src={ImageLogo} alt="" width={40} height={40} />
       </div>
@@ -71,7 +98,7 @@ export default function Header({}: Props) {
           aria-expanded={open ? "true" : undefined}
           variant="text"
           disableElevation
-          onClick={handleClick}
+          onMouseEnter={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
           sx={{ color: "#5a5a5a" }}
         >
@@ -85,23 +112,24 @@ export default function Header({}: Props) {
           anchorEl={anchorEl}
           open={open}
           onClose={handleClose}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
-          <MenuItem onClick={handleClose} disableRipple>
-            <EditIcon />
-            Edit
+          <MenuItem
+            onClick={handleClose}
+            disableRipple
+            style={{ fontSize: 15 }}
+          >
+            <AccountBoxIcon style={{ marginRight: 5 }} />
+            Thông tin cá nhân
           </MenuItem>
-          <MenuItem onClick={handleClose} disableRipple>
-            <FileCopyIcon />
-            Duplicate
-          </MenuItem>
-          <Divider sx={{ my: 0.5 }} />
-          <MenuItem onClick={handleClose} disableRipple>
-            <ArchiveIcon />
-            Archive
-          </MenuItem>
-          <MenuItem onClick={handleClose} disableRipple>
-            <MoreHorizIcon />
-            Log out
+          <MenuItem
+            onClick={handleClose}
+            disableRipple
+            style={{ fontSize: 15 }}
+          >
+            <LogoutIcon style={{ marginRight: 5, marginLeft: 2 }} />
+            Đăng xuất
           </MenuItem>
         </Menu>
       </div>
