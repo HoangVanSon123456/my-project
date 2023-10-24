@@ -45,13 +45,13 @@ export default function ModalExportFile({
           level="body-sm"
           textColor="inherit"
           fontWeight="lg"
-          mb={1}
-          mt={1}
+          mb={1.5}
+          mt={1.5}
         >
           Bạn có chắc chắn muốn xuất tài liệu ?
         </Typography>
         <hr></hr>
-        <div className="text-end mt-2">
+        <div className="text-end mt-3">
           <Button
             variant="outlined"
             sx={{
@@ -59,6 +59,10 @@ export default function ModalExportFile({
               color: "red",
               size: "medium",
               borderColor: "red",
+              "&:hover": {
+                borderColor: "#FF0000",
+                color: "#FF0000",
+              },
             }}
           >
             Xác nhận
@@ -70,6 +74,10 @@ export default function ModalExportFile({
               marginLeft: 1,
               color: "#404040",
               borderColor: "#404040",
+              "&:hover": {
+                borderColor: "#708090",
+                color: "#708090",
+              },
             }}
             onClick={() => handleCloseModalExport()}
           >
