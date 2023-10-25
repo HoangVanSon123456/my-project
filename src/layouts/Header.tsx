@@ -9,6 +9,7 @@ import Image from "next/image";
 import ImageLogo from "../../public/full-m2H7K9N4A0d3Z5d3.png";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import ListIcon from "@mui/icons-material/List";
 
 type Props = {};
 
@@ -32,8 +33,8 @@ export default function Header({}: Props) {
     setAnchorEl2(null);
   };
   return (
-    <>
-      <div className="">
+    <div className="">
+      <div className="flex items-center">
         <Button
           id="demo-customized-button"
           aria-controls={open2 ? "demo-customized-menu" : undefined}
@@ -85,54 +86,54 @@ export default function Header({}: Props) {
             English
           </MenuItem>
         </Menu>
-      </div>
-      <NotificationsActiveIcon style={{ marginRight: 13 }} />
-      <div className="rounded-full">
-        <Image src={ImageLogo} alt="" width={40} height={40} />
-      </div>
-      <div className="mr-2">
-        <Button
-          id="demo-customized-button"
-          aria-controls={open ? "demo-customized-menu" : undefined}
-          aria-haspopup="true"
-          aria-expanded={open ? "true" : undefined}
-          variant="text"
-          disableElevation
-          onMouseEnter={handleClick}
-          endIcon={<KeyboardArrowDownIcon />}
-          sx={{ color: "#5a5a5a" }}
-        >
-          Hoàng Văn Sơn
-        </Button>
-        <Menu
-          id="demo-customized-menu"
-          MenuListProps={{
-            "aria-labelledby": "demo-customized-button",
-          }}
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          transformOrigin={{ horizontal: "right", vertical: "top" }}
-          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-        >
-          <MenuItem
-            onClick={handleClose}
-            disableRipple
-            style={{ fontSize: 15 }}
+        <NotificationsActiveIcon style={{ marginRight: 13 }} />
+        <div className="rounded-full">
+          <Image src={ImageLogo} alt="" width={40} height={40} />
+        </div>
+        <div className="mr-2">
+          <Button
+            id="demo-customized-button"
+            aria-controls={open ? "demo-customized-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            variant="text"
+            disableElevation
+            onMouseEnter={handleClick}
+            endIcon={<KeyboardArrowDownIcon />}
+            sx={{ color: "#5a5a5a" }}
           >
-            <AccountBoxIcon style={{ marginRight: 5 }} />
-            Thông tin cá nhân
-          </MenuItem>
-          <MenuItem
-            onClick={handleClose}
-            disableRipple
-            style={{ fontSize: 15 }}
+            Hoàng Văn Sơn
+          </Button>
+          <Menu
+            id="demo-customized-menu"
+            MenuListProps={{
+              "aria-labelledby": "demo-customized-button",
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            transformOrigin={{ horizontal: "right", vertical: "top" }}
+            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <LogoutIcon style={{ marginRight: 5, marginLeft: 2 }} />
-            Đăng xuất
-          </MenuItem>
-        </Menu>
+            <MenuItem
+              onClick={handleClose}
+              disableRipple
+              style={{ fontSize: 15 }}
+            >
+              <AccountBoxIcon style={{ marginRight: 5 }} />
+              Thông tin cá nhân
+            </MenuItem>
+            <MenuItem
+              onClick={handleClose}
+              disableRipple
+              style={{ fontSize: 15 }}
+            >
+              <LogoutIcon style={{ marginRight: 5, marginLeft: 2 }} />
+              Đăng xuất
+            </MenuItem>
+          </Menu>
+        </div>
       </div>
-    </>
+    </div>
   );
 }

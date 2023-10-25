@@ -1,7 +1,7 @@
 import http from "./http";
 
 const getList = async () => {
-  const getData = await http.get("/user");
+  const getData = await http.get("/users");
   return getData;
 };
 

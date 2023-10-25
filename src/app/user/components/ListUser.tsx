@@ -1,9 +1,10 @@
-import User from "@/types/User";
+import User, { Statuses } from "@/types/User";
+import { getFieldHtml } from "@/utils/common";
 import React from "react";
 
-type Props = { userList: User[] };
+type Props = { userList: User[]; handleDelete: Function };
 
-export default function ListUser({ userList }: Props) {
+export default function ListUser({ userList, handleDelete }: Props) {
   return (
     <table className="w-full text-sm text-left text-gray-600 ">
       <thead className="text-xs text-gray-600 uppercase bg-gray-50 ">
@@ -21,16 +22,19 @@ export default function ListUser({ userList }: Props) {
             </div>
           </th>
           <th scope="col" className="px-6 py-3">
-            UserName
+            Tên tài khoản
+          </th>
+          <th scope="col" className="px-6 py-3">
+            Địa chỉ
           </th>
           <th scope="col" className="px-6 py-3">
             Email
           </th>
           <th scope="col" className="px-6 py-3">
-            Address
+            Trạng thái
           </th>
           <th scope="col" className="px-6 py-3">
-            Phone
+            Số điện thoại
           </th>
           <th scope="col" className="px-6 py-3">
             Action
@@ -39,7 +43,7 @@ export default function ListUser({ userList }: Props) {
       </thead>
       <tbody>
         {userList.map((user, index) => (
-          <tr className="bg-white border-b">
+          <tr className="bg-white border-b" key={index}>
             <td className="w-4 p-4">
               <div className="flex items-center">
                 <input
@@ -54,19 +58,33 @@ export default function ListUser({ userList }: Props) {
             </td>
             <th
               scope="row"
-              className="px-6 py-4 font-medium text-gray-600 whitespace-nowrap dark:text-white"
+              className="px-6 py-4 font-medium text-gray-600 whitespace-nowrap"
             >
               {user.userName}
             </th>
-            <td className="px-6 py-4">{user.email}</td>
             <td className="px-6 py-4">{user.address}</td>
+            <td className="px-6 py-4">{user.email}</td>
+            <td className="px-6 py-4">{getFieldHtml(Statuses, user.status)}</td>
             <td className="px-6 py-4">{user.phone}</td>
             <td className="px-6 py-4">
               <a
                 href="#"
-                className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                className="font-medium text-blue-600  hover:underline"
               >
-                Edit
+                Sửa
+              </a>
+              <a
+                href="#"
+                className="font-medium mx-3 text-red-600 hover:underline"
+                onClick={() => handleDelete(user.id!)}
+              >
+                Xóa
+              </a>
+              <a
+                href="#"
+                className="font-medium mr-3 text-yellow-300 hover:underline"
+              >
+                Chi tiết
               </a>
             </td>
           </tr>
