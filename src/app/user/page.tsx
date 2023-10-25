@@ -5,7 +5,7 @@ import UserService from "@/service/UserService";
 import User from "@/types/User";
 import ModalExportFile from "@/components/ModalExportFile";
 import { Pagination } from "@mui/material";
-import SearchUserFrom from "./components/SearchUserFrom";
+import SearchUserFrom from "./components/SearchUserForm";
 import ListUser from "./components/ListUser";
 import ModalDelete from "@/components/ModalDelete";
 import ContentHeader from "@/components/ContentHeader";
@@ -18,9 +18,7 @@ export default function UserList({}: Props) {
   const [userList, setUserList] = useState<User[]>([]);
   const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
 
-  const handleDelete = (id: number) => {
-    setShowModalDelete(true);
-  };
+ 
 
   useEffect(() => {
     getListUser();
@@ -48,6 +46,10 @@ export default function UserList({}: Props) {
 
   const handleCloseModalExport = () => {
     setShowModalExport(false);
+  };
+
+  const handleDelete = (id: number) => {
+    setShowModalDelete(true);
   };
 
   const handleCloseModalDelete = () => {

@@ -1,10 +1,9 @@
-import User, { Statuses } from "@/types/User";
-import { getFieldHtml } from "@/utils/common";
+import Customer from "@/types/Customer";
 import React from "react";
 
-type Props = { userList: User[]; handleDelete: Function };
+type Props = { customerList: Customer[]; handleDelete: Function };
 
-export default function ListUser({ userList, handleDelete }: Props) {
+export default function ListCustomer({ customerList, handleDelete }: Props) {
   return (
     <table className="w-full text-sm text-left text-gray-600 ">
       <thead className="text-xs text-gray-600 uppercase bg-gray-50 ">
@@ -42,8 +41,8 @@ export default function ListUser({ userList, handleDelete }: Props) {
         </tr>
       </thead>
       <tbody>
-        {userList.map((user) => (
-          <tr className="bg-white border-b" key={user.id}>
+        {customerList.map((customer) => (
+          <tr className="bg-white border-b">
             <td className="w-4 p-4">
               <div className="flex items-center">
                 <input
@@ -56,16 +55,16 @@ export default function ListUser({ userList, handleDelete }: Props) {
                 </label>
               </div>
             </td>
-            <th
+            {/* <th
               scope="row"
               className="px-6 py-4 font-medium text-gray-600 whitespace-nowrap"
             >
-              {user.userName}
+              {customer.userName}
             </th>
-            <td className="px-6 py-4">{user.address}</td>
-            <td className="px-6 py-4">{user.email}</td>
+            <td className="px-6 py-4">{customer.address}</td>
+            <td className="px-6 py-4">{customer.email}</td>
             <td className="px-6 py-4">{getFieldHtml(Statuses, user.status)}</td>
-            <td className="px-6 py-4">{user.phone}</td>
+            <td className="px-6 py-4">{customer.phone}</td> */}
             <td className="px-6 py-4">
               <a
                 href="#"
@@ -76,7 +75,7 @@ export default function ListUser({ userList, handleDelete }: Props) {
               <a
                 href="#"
                 className="font-medium mx-3 text-red-600 hover:underline"
-                onClick={() => handleDelete(user.id!)}
+                // onClick={() => handleDelete(user.id!)}
               >
                 Xóa
               </a>
