@@ -10,15 +10,16 @@ import ListUser from "./components/ListUser";
 import ModalDelete from "@/components/ModalDelete";
 import ContentHeader from "@/components/ContentHeader";
 import { find } from "lodash";
+import ModalUserCreate from "./components/ModalUserCreate";
 
 type Props = {};
 
 export default function UserList({}: Props) {
   const [showModal, setShowModal] = useState(false);
   const [showModalExport, setShowModalExport] = useState(false);
+  const [showModalCreate, setShowModalCreate] = useState(false);
   const [userList, setUserList] = useState<User[]>([]);
   const [user, setUser] = useState<User>();
-
   const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
   const [itemId, setItemId] = useState(0);
 
@@ -34,12 +35,17 @@ export default function UserList({}: Props) {
       .catch((err) => console.log(err));
   };
 
-  const submitCreate = async (data: User) => {
-    await UserService.createUser(data)
+  const updateItem = async (data: User) => {
+    let userId = 0;
+    if (data.id && user) {
+      userId = user.id!;
+    }
+    await UserService.updateUser(data, userId)
       .then((res) => {
         console.log(res);
         setUserList((prev) => [...prev, res]);
         setShowModal(false);
+        getListUser();
       })
       .catch((err) => {
         console.log(err);
@@ -65,15 +71,26 @@ export default function UserList({}: Props) {
     if (id > 0) {
       const r = find(userList, { id });
       if (r) {
-        console.log(r);
         setShowModal(true);
         setUser(r);
       }
     }
   };
 
-  const handleModalUpdate = () => {
-    setShowModal(true);
+  const submitItem = async (data: User) => {
+    await UserService.createUser(data)
+      .then((res) => {
+        console.log(res);
+        setUserList((prev) => [...prev, res]);
+        setShowModalCreate(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleModalCreate = () => {
+    setShowModalCreate(true);
   };
 
   const handleModalExport = () => {
@@ -82,6 +99,7 @@ export default function UserList({}: Props) {
 
   const handleCloseModal = () => {
     setShowModal(false);
+    setShowModalCreate(false);
   };
 
   const handleCloseModalExport = () => {
@@ -96,7 +114,7 @@ export default function UserList({}: Props) {
       <ContentHeader
         title="Quản lý nhân viên"
         titleCreate="Thêm nhân viên"
-        handleModalUpdate={handleModalUpdate}
+        handleModalUpdate={handleModalCreate}
         handleModalExport={handleModalExport}
       />
       <div className="mx-5 mt-4">
@@ -117,7 +135,13 @@ export default function UserList({}: Props) {
       <ModalUserUpdate
         showModal={showModal}
         handleCloseModal={handleCloseModal}
-        submitCreate={submitCreate}
+        updateItem={updateItem}
+        user={user}
+      />
+      <ModalUserCreate
+        showModalCreate={showModalCreate}
+        handleCloseModal={handleCloseModal}
+        submitItem={submitItem}
       />
       <ModalExportFile
         showModalExport={showModalExport}

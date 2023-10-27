@@ -16,21 +16,16 @@ const deleteUser = async (id: number) => {
   return data;
 };
 
-const update = async (param: Partial<User>, id: number) => {
-  if (id > 0) {
-    const { data } = await http.patch(`/update/user/${id}`, param);
-    return data;
-  } else {
-    const { data } = await http.post("/create/user", param);
-    return data;
-  }
+const updateUser = async (param: Partial<User>, id: number) => {
+  const { data } = await http.patch(`/update/user/${id}`, param);
+  return data;
 };
 
 const UserService = {
   getList,
   createUser,
   deleteUser,
-  update,
+  updateUser,
 };
 
 export default UserService;

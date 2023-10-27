@@ -1,5 +1,4 @@
-"use client";
-import React, { useEffect } from "react";
+import React from "react";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
@@ -7,37 +6,29 @@ import Sheet from "@mui/joy/Sheet";
 import { useForm } from "react-hook-form";
 import User from "@/types/User";
 type Props = {
-  showModal: boolean;
+  showModalCreate: boolean;
   handleCloseModal: Function;
-  updateItem: Function;
-  user?: User;
+  submitItem: Function;
 };
 
-export default function ModalUserUpdate({
-  showModal,
+export default function ModalUserCreate({
+  showModalCreate,
   handleCloseModal,
-  updateItem,
-  user,
+  submitItem,
 }: Props) {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data: User) => {
-    if (updateItem) {
-      updateItem(data);
+    if (submitItem) {
+      submitItem(data);
+      reset();
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      reset(user);
-    }
-  }, [user]);
-
   return (
     <Modal
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
-      open={showModal}
+      open={showModalCreate}
       onClose={() => handleCloseModal()}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
