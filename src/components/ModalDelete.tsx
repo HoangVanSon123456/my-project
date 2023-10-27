@@ -3,11 +3,16 @@ import { Button, Modal } from "@mui/material";
 import Sheet from "@mui/joy/Sheet";
 import { Typography } from "@mui/joy";
 
-type Props = { showModalDelete: boolean; handleCloseModalDelete: Function };
+type Props = {
+  showModalDelete: boolean;
+  handleCloseModalDelete: Function;
+  submitAction: Function;
+};
 
 export default function ModalDelete({
   showModalDelete,
   handleCloseModalDelete,
+  submitAction,
 }: Props) {
   return (
     <Modal
@@ -51,6 +56,7 @@ export default function ModalDelete({
         <hr></hr>
         <div className="text-end mt-3">
           <Button
+            onClick={() => submitAction()}
             variant="outlined"
             sx={{
               textTransform: "capitalize",

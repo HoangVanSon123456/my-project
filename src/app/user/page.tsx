@@ -9,6 +9,7 @@ import SearchUserFrom from "./components/SearchUserForm";
 import ListUser from "./components/ListUser";
 import ModalDelete from "@/components/ModalDelete";
 import ContentHeader from "@/components/ContentHeader";
+import { find } from "lodash";
 
 type Props = {};
 
@@ -16,9 +17,10 @@ export default function UserList({}: Props) {
   const [showModal, setShowModal] = useState(false);
   const [showModalExport, setShowModalExport] = useState(false);
   const [userList, setUserList] = useState<User[]>([]);
-  const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
+  const [user, setUser] = useState<User>();
 
- 
+  const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
+  const [itemId, setItemId] = useState(0);
 
   useEffect(() => {
     getListUser();
@@ -27,9 +29,47 @@ export default function UserList({}: Props) {
   const getListUser = async () => {
     await UserService.getList()
       .then((res) => {
-        setUserList(res.data);
+        setUserList(res.data.data);
       })
       .catch((err) => console.log(err));
+  };
+
+  const submitCreate = async (data: User) => {
+    await UserService.createUser(data)
+      .then((res) => {
+        console.log(res);
+        setUserList((prev) => [...prev, res]);
+        setShowModal(false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDelete = (id: number) => {
+    console.log(id);
+    setShowModalDelete(true);
+    setItemId(id);
+  };
+
+  const deleteItem = async () => {
+    await UserService.deleteUser(itemId)
+      .then(() => {
+        getListUser();
+        setShowModalDelete(false);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleUpdate = (id: number) => {
+    if (id > 0) {
+      const r = find(userList, { id });
+      if (r) {
+        console.log(r);
+        setShowModal(true);
+        setUser(r);
+      }
+    }
   };
 
   const handleModalUpdate = () => {
@@ -48,10 +88,6 @@ export default function UserList({}: Props) {
     setShowModalExport(false);
   };
 
-  const handleDelete = (id: number) => {
-    setShowModalDelete(true);
-  };
-
   const handleCloseModalDelete = () => {
     setShowModalDelete(false);
   };
@@ -60,7 +96,7 @@ export default function UserList({}: Props) {
       <ContentHeader
         title="Quản lý nhân viên"
         titleCreate="Thêm nhân viên"
-        handleModalCreate={handleModalUpdate}
+        handleModalUpdate={handleModalUpdate}
         handleModalExport={handleModalExport}
       />
       <div className="mx-5 mt-4">
@@ -68,7 +104,11 @@ export default function UserList({}: Props) {
       </div>
       <div className="mx-5 mt-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-          <ListUser userList={userList} handleDelete={handleDelete} />
+          <ListUser
+            userList={userList}
+            handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
+          />
           <div className="flex justify-end p-3">
             <Pagination count={10} variant="outlined" color="primary" />
           </div>
@@ -77,6 +117,7 @@ export default function UserList({}: Props) {
       <ModalUserUpdate
         showModal={showModal}
         handleCloseModal={handleCloseModal}
+        submitCreate={submitCreate}
       />
       <ModalExportFile
         showModalExport={showModalExport}
@@ -85,6 +126,7 @@ export default function UserList({}: Props) {
       <ModalDelete
         showModalDelete={showModalDelete}
         handleCloseModalDelete={handleCloseModalDelete}
+        submitAction={deleteItem}
       />
     </>
   );

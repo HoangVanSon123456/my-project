@@ -1,10 +1,23 @@
-import User, { Statuses } from "@/types/User";
+import User, { Status } from "@/types/User";
 import { getFieldHtml } from "@/utils/common";
 import React from "react";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DetailsOutlinedIcon from "@mui/icons-material/DetailsOutlined";
+type Props = {
+  userList: User[];
+  handleDelete: Function;
+  handleUpdate: Function;
+};
 
-type Props = { userList: User[]; handleDelete: Function };
-
-export default function ListUser({ userList, handleDelete }: Props) {
+export default function ListUser({
+  userList,
+  handleDelete,
+  handleUpdate,
+}: Props) {
+  const handleEditItem = (id: number) => {
+    if (handleUpdate) handleUpdate(id);
+  };
   return (
     <table className="w-full text-sm text-left text-gray-600 ">
       <thead className="text-xs text-gray-600 uppercase bg-gray-50 ">
@@ -42,8 +55,8 @@ export default function ListUser({ userList, handleDelete }: Props) {
         </tr>
       </thead>
       <tbody>
-        {userList.map((user) => (
-          <tr className="bg-white border-b" key={user.id}>
+        {userList.map((user: User, index: number) => (
+          <tr className="bg-white border-b" key={index}>
             <td className="w-4 p-4">
               <div className="flex items-center">
                 <input
@@ -64,28 +77,18 @@ export default function ListUser({ userList, handleDelete }: Props) {
             </th>
             <td className="px-6 py-4">{user.address}</td>
             <td className="px-6 py-4">{user.email}</td>
-            <td className="px-6 py-4">{getFieldHtml(Statuses, user.status)}</td>
+            <td className="px-6 py-4">{getFieldHtml(Status, user.status!)}</td>
             <td className="px-6 py-4">{user.phone}</td>
             <td className="px-6 py-4">
-              <a
-                href="#"
-                className="font-medium text-blue-600  hover:underline"
-              >
-                Sửa
-              </a>
-              <a
-                href="#"
-                className="font-medium mx-3 text-red-600 hover:underline"
-                onClick={() => handleDelete(user.id!)}
-              >
-                Xóa
-              </a>
-              <a
-                href="#"
-                className="font-medium mr-3 text-yellow-300 hover:underline"
-              >
-                Chi tiết
-              </a>
+              <button onClick={() => handleEditItem(user.id!)}>
+                <EditOutlinedIcon sx={{ color: "#2E34E6" }} />
+              </button>
+              <button onClick={() => handleDelete(user.id)}>
+                <DeleteOutlinedIcon sx={{ color: "#E62E2E", marginX: "5px" }} />
+              </button>
+              <button>
+                <DetailsOutlinedIcon sx={{ color: "#D6D449" }} />
+              </button>
             </td>
           </tr>
         ))}

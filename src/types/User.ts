@@ -1,15 +1,9 @@
 import { ItemParam } from "@/utils/common";
 
-export enum Status {
-  Active = 1,
-  Inactive = 2,
-  Lock = 3,
-}
-
-export const Statuses: ItemParam[] = [
-  { id: Status.Active, name: "Đang hoạt động" },
-  { id: Status.Inactive, name: "Không họat động" },
-  { id: Status.Lock, name: "Khóa tài khoản" },
+export const Status: ItemParam[] = [
+  { id: 1, name: "Đang hoạt động" },
+  { id: 2, name: "Không họat động" },
+  { id: 3, name: "Khóa tài khoản" },
 ];
 export default interface User {
   id?: number;
@@ -20,5 +14,5 @@ export default interface User {
   address?: string;
   password?: string;
   phone?: string;
-  status: Status;
+  status?: number;
 }

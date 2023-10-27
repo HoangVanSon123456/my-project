@@ -1,3 +1,4 @@
+import User from "@/types/User";
 import http from "./http";
 
 const getList = async () => {
@@ -5,8 +6,31 @@ const getList = async () => {
   return getData;
 };
 
+const createUser = async (param: User) => {
+  const { data } = await http.post("/create/user", param);
+  return data;
+};
+
+const deleteUser = async (id: number) => {
+  const { data } = await http.delete(`/delete/user/${id}`);
+  return data;
+};
+
+const update = async (param: Partial<User>, id: number) => {
+  if (id > 0) {
+    const { data } = await http.patch(`/update/user/${id}`, param);
+    return data;
+  } else {
+    const { data } = await http.post("/create/user", param);
+    return data;
+  }
+};
+
 const UserService = {
   getList,
+  createUser,
+  deleteUser,
+  update,
 };
 
 export default UserService;
