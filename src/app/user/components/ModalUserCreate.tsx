@@ -46,12 +46,12 @@ export default function ModalUserCreate({
         <Typography
           component="h2"
           id="modal-title"
-          level="h4"
+          level="h2"
           textColor="inherit"
           fontWeight="lg"
-          mb={1}
+          mb={2}
         >
-          Cập nhật nhân viên
+          Thêm nhân viên
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid md:grid-cols-2 md:gap-6">
@@ -184,11 +184,17 @@ export default function ModalUserCreate({
               </select>
             </div>
           </div>
-          <button
+          {/* <button
             type="submit"
             className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
           >
-            Submit
+            Thêm thành viên
+          </button> */}
+          <button
+            type="submit"
+            className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+          >
+            Thêm thành viên
           </button>
         </form>
       </Sheet>

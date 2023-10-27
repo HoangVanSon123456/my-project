@@ -55,10 +55,10 @@ export default function ModalUserUpdate({
         <Typography
           component="h2"
           id="modal-title"
-          level="h4"
+          level="h2"
           textColor="inherit"
           fontWeight="lg"
-          mb={1}
+          mb={2}
         >
           Cập nhật nhân viên
         </Typography>
@@ -195,9 +195,9 @@ export default function ModalUserUpdate({
           </div>
           <button
             type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            className="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
           >
-            Submit
+            Cập nhật nhân viên
           </button>
         </form>
       </Sheet>

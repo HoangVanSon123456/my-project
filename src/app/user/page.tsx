@@ -11,6 +11,8 @@ import ModalDelete from "@/components/ModalDelete";
 import ContentHeader from "@/components/ContentHeader";
 import { find } from "lodash";
 import ModalUserCreate from "./components/ModalUserCreate";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {};
 
@@ -46,9 +48,11 @@ export default function UserList({}: Props) {
         setUserList((prev) => [...prev, res]);
         setShowModal(false);
         getListUser();
+        toast.success("Cập nhật thành công");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Cập nhật thất bại");
       });
   };
 
@@ -63,8 +67,12 @@ export default function UserList({}: Props) {
       .then(() => {
         getListUser();
         setShowModalDelete(false);
+        toast.success("Xóa thành công");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        toast.error("Thất bại");
+      });
   };
 
   const handleUpdate = (id: number) => {
@@ -83,9 +91,11 @@ export default function UserList({}: Props) {
         console.log(res);
         setUserList((prev) => [...prev, res]);
         setShowModalCreate(false);
+        toast.success("Thêm Thành công");
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Thêm Thất bại");
       });
   };
 

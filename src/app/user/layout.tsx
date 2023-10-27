@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import Navbar from "@/layouts/Navbar";
 import Footer from "@/layouts/Footer";
 import Layout from "@/layouts/Layout";
+import ToastNotification from "@/components/ToastNotification";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +35,9 @@ export default function UserLayout({
             <Footer />
           </div>
         </div> */}
-        <Layout>{children}</Layout>
+        <Layout>
+          {children} <ToastNotification />
+        </Layout>
       </body>
     </html>
   );
