@@ -11,3 +11,9 @@ export const getFieldHtml = (fields: ItemParam[], itemId: number) => (
 
 export const getFieldInArrayObject = (listObj: object[], fieldId: number) =>
   get(find(listObj, ["id", fieldId]), "name");
+
+export const closeModal = (changeShow: Function) => {
+  if (changeShow) {
+    changeShow(false);
+  }
+};

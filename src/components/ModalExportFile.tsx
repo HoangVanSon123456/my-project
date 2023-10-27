@@ -4,19 +4,22 @@ import React from "react";
 import Sheet from "@mui/joy/Sheet";
 import ModalClose from "@mui/joy/ModalClose";
 import { Typography } from "@mui/joy";
+import { closeModal } from "@/utils/common";
 
-type Props = { showModalExport: boolean; handleCloseModalExport: Function };
+type Props = {
+  showModalExport: boolean;
+  changeShow: Function;
+};
 
 export default function ModalExportFile({
   showModalExport,
-  handleCloseModalExport,
+  changeShow,
 }: Props) {
   return (
     <Modal
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
       open={showModalExport}
-      onClose={() => handleCloseModalExport()}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <Sheet
@@ -79,7 +82,7 @@ export default function ModalExportFile({
                 color: "#708090",
               },
             }}
-            onClick={() => handleCloseModalExport()}
+            onClick={() => closeModal(changeShow)}
           >
             Thoát
           </Button>

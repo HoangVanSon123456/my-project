@@ -20,7 +20,7 @@ export default function UserList({}: Props) {
   const [showModalCreate, setShowModalCreate] = useState(false);
   const [userList, setUserList] = useState<User[]>([]);
   const [user, setUser] = useState<User>();
-  const [showModalDelete, setShowModalDelete] = useState<boolean>(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
   const [itemId, setItemId] = useState(0);
 
   useEffect(() => {
@@ -96,19 +96,6 @@ export default function UserList({}: Props) {
   const handleModalExport = () => {
     setShowModalExport(true);
   };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setShowModalCreate(false);
-  };
-
-  const handleCloseModalExport = () => {
-    setShowModalExport(false);
-  };
-
-  const handleCloseModalDelete = () => {
-    setShowModalDelete(false);
-  };
   return (
     <>
       <ContentHeader
@@ -134,23 +121,23 @@ export default function UserList({}: Props) {
       </div>
       <ModalUserUpdate
         showModal={showModal}
-        handleCloseModal={handleCloseModal}
         updateItem={updateItem}
         user={user}
+        changeShow={(s: boolean) => setShowModal(s)}
       />
       <ModalUserCreate
         showModalCreate={showModalCreate}
-        handleCloseModal={handleCloseModal}
         submitItem={submitItem}
+        changeShow={(s: boolean) => setShowModalCreate(s)}
       />
       <ModalExportFile
         showModalExport={showModalExport}
-        handleCloseModalExport={handleCloseModalExport}
+        changeShow={(s: boolean) => setShowModalExport(s)}
       />
       <ModalDelete
         showModalDelete={showModalDelete}
-        handleCloseModalDelete={handleCloseModalDelete}
         submitAction={deleteItem}
+        changeShow={(s: boolean) => setShowModalDelete(s)}
       />
     </>
   );

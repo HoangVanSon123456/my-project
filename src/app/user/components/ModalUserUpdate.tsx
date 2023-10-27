@@ -6,18 +6,19 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import { useForm } from "react-hook-form";
 import User from "@/types/User";
+import { closeModal } from "@/utils/common";
 type Props = {
   showModal: boolean;
-  handleCloseModal: Function;
-  updateItem: Function;
   user?: User;
+  changeShow: Function;
+  updateItem: Function;
 };
 
 export default function ModalUserUpdate({
   showModal,
-  handleCloseModal,
   updateItem,
   user,
+  changeShow,
 }: Props) {
   const { register, handleSubmit, reset } = useForm();
 
@@ -38,7 +39,7 @@ export default function ModalUserUpdate({
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
       open={showModal}
-      onClose={() => handleCloseModal()}
+      onClose={() => closeModal(changeShow)}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <Sheet

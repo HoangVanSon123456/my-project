@@ -2,24 +2,24 @@ import React from "react";
 import { Button, Modal } from "@mui/material";
 import Sheet from "@mui/joy/Sheet";
 import { Typography } from "@mui/joy";
+import { closeModal } from "@/utils/common";
 
 type Props = {
   showModalDelete: boolean;
-  handleCloseModalDelete: Function;
   submitAction: Function;
+  changeShow: Function;
 };
 
 export default function ModalDelete({
   showModalDelete,
-  handleCloseModalDelete,
   submitAction,
+  changeShow,
 }: Props) {
   return (
     <Modal
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
       open={showModalDelete}
-      onClose={() => handleCloseModalDelete()}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <Sheet
@@ -83,7 +83,7 @@ export default function ModalDelete({
                 color: "#708090",
               },
             }}
-            onClick={() => handleCloseModalDelete()}
+            onClick={() => closeModal(changeShow)}
           >
             Thoát
           </Button>

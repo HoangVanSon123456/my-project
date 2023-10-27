@@ -5,16 +5,17 @@ import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import { useForm } from "react-hook-form";
 import User from "@/types/User";
+import { closeModal } from "@/utils/common";
 type Props = {
   showModalCreate: boolean;
-  handleCloseModal: Function;
   submitItem: Function;
+  changeShow: Function;
 };
 
 export default function ModalUserCreate({
   showModalCreate,
-  handleCloseModal,
   submitItem,
+  changeShow,
 }: Props) {
   const { register, handleSubmit, reset } = useForm();
 
@@ -29,7 +30,7 @@ export default function ModalUserCreate({
       aria-labelledby="modal-title"
       aria-describedby="modal-desc"
       open={showModalCreate}
-      onClose={() => handleCloseModal()}
+      onClose={() => closeModal(changeShow)}
       sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
       <Sheet
