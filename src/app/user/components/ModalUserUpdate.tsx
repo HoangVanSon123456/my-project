@@ -55,7 +55,7 @@ export default function ModalUserUpdate({
         <Typography
           component="h2"
           id="modal-title"
-          level="h2"
+          level="h3"
           textColor="inherit"
           fontWeight="lg"
           mb={2}

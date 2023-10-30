@@ -6,18 +6,50 @@ import Sheet from "@mui/joy/Sheet";
 import { useForm } from "react-hook-form";
 import User from "@/types/User";
 import { closeModal } from "@/utils/common";
+import * as yup from "yup";
+import { COMMON_MESSAGE } from "@/constants/common";
+import { yupResolver } from "@hookform/resolvers/yup";
+
 type Props = {
   showModalCreate: boolean;
   submitItem: Function;
   changeShow: Function;
 };
 
+const schema = yup
+  .object({
+    firstName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
+    lastName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
+    userName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
+    password: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
+    address: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
+    phone: yup
+      .string()
+      .required(COMMON_MESSAGE.FIELD_REQUIRED)
+      .matches(/(84|0[3|5|7|8|9])+([0-9]{8})\b/g, COMMON_MESSAGE.FIELD_PHONE)
+      .trim(),
+    email: yup
+      .string()
+      .required(COMMON_MESSAGE.FIELD_REQUIRED)
+      .email(COMMON_MESSAGE.FIELD_EMAIL)
+      .trim(),
+    status: yup.number().required(COMMON_MESSAGE.FIELD_REQUIRED),
+  })
+  .required();
+
 export default function ModalUserCreate({
   showModalCreate,
   submitItem,
   changeShow,
 }: Props) {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = (data: User) => {
     if (submitItem) {
@@ -46,7 +78,7 @@ export default function ModalUserCreate({
         <Typography
           component="h2"
           id="modal-title"
-          level="h2"
+          level="h3"
           textColor="inherit"
           fontWeight="lg"
           mb={2}
@@ -65,10 +97,13 @@ export default function ModalUserCreate({
               <input
                 type="text"
                 id="firstName"
-                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Nhập tên"
                 {...register("firstName")}
               />
+              <span className="text-red-600 text-xs">
+                {errors.firstName?.message}
+              </span>
             </div>
             <div className="relative z-0 w-full mb-4 group">
               <label
@@ -80,7 +115,7 @@ export default function ModalUserCreate({
               <input
                 type="text"
                 id="lastName"
-                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Nhập họ"
                 {...register("lastName")}
               />
@@ -178,22 +213,14 @@ export default function ModalUserCreate({
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                 {...register("status")}
               >
+                <option selected>Chọn một hành động</option>
                 <option value="1">Đang hoạt động</option>
                 <option value="2">Không hoạt động</option>
                 <option value="3">Khóa tài khoản</option>
               </select>
             </div>
           </div>
-          {/* <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-          >
-            Thêm thành viên
-          </button> */}
-          <button
-            type="submit"
-            className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-          >
+          <button className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Thêm thành viên
           </button>
         </form>
