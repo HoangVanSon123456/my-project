@@ -13,6 +13,7 @@ import { find } from "lodash";
 import ModalUserCreate from "./components/ModalUserCreate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalUserDetail from "./components/ModalUserDetail";
 
 type Props = {};
 
@@ -23,6 +24,8 @@ export default function UserList({}: Props) {
   const [userList, setUserList] = useState<User[]>([]);
   const [user, setUser] = useState<User>();
   const [showModalDelete, setShowModalDelete] = useState(false);
+  const [showModalDetail, setShowModalDetail] = useState(false);
+
   const [itemId, setItemId] = useState(0);
 
   useEffect(() => {
@@ -99,6 +102,16 @@ export default function UserList({}: Props) {
       });
   };
 
+  const handleDetail = (id: number) => {
+    if (id > 0) {
+      const r = find(userList, { id });
+      if (r) {
+        setShowModalDetail(true);
+        setUser(r);
+      }
+    }
+  };
+
   const handleModalCreate = () => {
     setShowModalCreate(true);
   };
@@ -123,6 +136,7 @@ export default function UserList({}: Props) {
             userList={userList}
             handleDelete={handleDelete}
             handleUpdate={handleUpdate}
+            handleDetail={handleDetail}
           />
           <div className="flex justify-end p-3">
             <Pagination count={10} variant="outlined" color="primary" />
@@ -148,6 +162,11 @@ export default function UserList({}: Props) {
         showModalDelete={showModalDelete}
         submitAction={deleteItem}
         changeShow={(s: boolean) => setShowModalDelete(s)}
+      />
+      <ModalUserDetail
+        changeShow={(s: boolean) => setShowModalDetail(s)}
+        showModalDetail={showModalDetail}
+        user={user}
       />
     </>
   );

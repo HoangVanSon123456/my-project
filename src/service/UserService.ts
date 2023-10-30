@@ -21,11 +21,17 @@ const updateUser = async (param: Partial<User>, id: number) => {
   return data;
 };
 
+const getUserById = async (id: number) => {
+  const { data } = await http.get(`/user/${id}`);
+  return data;
+};
+
 const UserService = {
   getList,
   createUser,
   deleteUser,
   updateUser,
+  getUserById,
 };
 
 export default UserService;
