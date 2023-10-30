@@ -18,6 +18,7 @@ type Props = {
 
 const schema = yup
   .object({
+    fullName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
     firstName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
     lastName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
     userName: yup.string().required(COMMON_MESSAGE.FIELD_REQUIRED).trim(),
@@ -86,6 +87,23 @@ export default function ModalUserCreate({
           Thêm nhân viên
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="grid mb-4">
+            <div className="relative z-0 w-full group">
+              <label
+                htmlFor="item-weight"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Họ và Tên
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                placeholder="Nhập tên"
+                {...register("fullName")}
+              />
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 md:gap-6">
             <div className="relative z-0 w-full group">
               <label

@@ -43,11 +43,12 @@ export default function ListUser({
               </div>
             </th>
             <th scope="col" className="px-6 py-3">
-              Tên tài khoản
+              Họ và tên
             </th>
             <th scope="col" className="px-6 py-3">
-              Địa chỉ
+              Tên tài khoản
             </th>
+
             <th scope="col" className="px-6 py-3">
               Email
             </th>
@@ -81,9 +82,10 @@ export default function ListUser({
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-600 whitespace-nowrap"
               >
-                {user.userName}
+                {user.fullName}
               </th>
-              <td className="px-6 py-4">{user.address}</td>
+              <td className="px-6 py-4">{user.userName}</td>
+
               <td className="px-6 py-4">{user.email}</td>
               <td className="px-6 py-4">
                 {getFieldHtml(Status, user.status!)}
