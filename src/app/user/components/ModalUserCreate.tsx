@@ -231,7 +231,6 @@ export default function ModalUserCreate({
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                 {...register("status")}
               >
-                <option selected>Chọn một hành động</option>
                 <option value="1">Đang hoạt động</option>
                 <option value="2">Không hoạt động</option>
                 <option value="3">Khóa tài khoản</option>

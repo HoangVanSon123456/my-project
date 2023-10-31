@@ -1,6 +1,6 @@
 import User from "@/types/User";
 import http from "./http";
-import { DataListResponse } from "./ApiResponse";
+import { ApiResponse, DataListResponse } from "./ApiResponse";
 
 const getList = async () => {
   const getData = await http.get<DataListResponse<User>>("/users");

@@ -64,8 +64,8 @@ export default function ListUser({
           </tr>
         </thead>
         <tbody>
-          {userList.map((user: User, index: number) => (
-            <tr className="bg-white border-b" key={index}>
+          {userList.map((user: User) => (
+            <tr className="bg-white border-b" key={user.id}>
               <td className="w-4 p-4">
                 <div className="flex items-center">
                   <input

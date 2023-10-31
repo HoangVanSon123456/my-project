@@ -11,34 +11,34 @@ export default function SearchUserFrom({}: Props) {
         </h2>
         <form action="#">
           <div className="grid gap-2 sm:grid-cols-2 sm:gap-3">
-            <div className="sm:col-span-2">
+            <div className="">
               <label
                 htmlFor="name"
                 className="block mb-2 text-sm font-medium text-gray-600"
               >
-                Tên tài khoản
+                Họ và tên
               </label>
               <input
                 type="text"
                 name="name"
                 id="name"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
-                placeholder="Tên tài khoản"
+                placeholder="VD: Hoàng Văn Sơn"
               />
             </div>
-            <div className="w-full">
+            <div>
               <label
-                htmlFor="address"
+                htmlFor="item-weight"
                 className="block mb-2 text-sm font-medium text-gray-600"
               >
-                Địa chỉ
+                Số điện thoại
               </label>
               <input
                 type="text"
-                name="brand"
-                id="brand"
-                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
-                placeholder="VD: số nhà, phường, xã, tỉnh"
+                name="item-weight"
+                id="item-weight"
+                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                placeholder="VD: 0123456789,..."
               />
             </div>
             <div className="w-full">
@@ -71,21 +71,6 @@ export default function SearchUserFrom({}: Props) {
                 <option value="2">Không hoạt động</option>
                 <option value="3">Khóa tài khoản</option>
               </select>
-            </div>
-            <div>
-              <label
-                htmlFor="item-weight"
-                className="block mb-2 text-sm font-medium text-gray-600"
-              >
-                Số điện thoại
-              </label>
-              <input
-                type="text"
-                name="item-weight"
-                id="item-weight"
-                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                placeholder="VD: 0123456789,..."
-              />
             </div>
           </div>
         </form>

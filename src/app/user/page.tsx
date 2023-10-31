@@ -1,12 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { lazy, useEffect, useState } from "react";
 import ModalUserUpdate from "./components/ModalUserUpdate";
 import UserService from "@/service/UserService";
 import User from "@/types/User";
 import ModalExportFile from "@/components/ModalExportFile";
 import { Pagination } from "@mui/material";
 import SearchUserFrom from "./components/SearchUserForm";
-import ListUser from "./components/ListUser";
 import ModalDelete from "@/components/ModalDelete";
 import ContentHeader from "@/components/ContentHeader";
 import { find } from "lodash";
@@ -14,6 +13,10 @@ import ModalUserCreate from "./components/ModalUserCreate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ModalUserDetail from "./components/ModalUserDetail";
+import dynamic from "next/dynamic";
+import { HttpStatusCode } from "axios";
+
+const ListUser = lazy(() => import("./components/ListUser"));
 
 type Props = {};
 
@@ -45,18 +48,15 @@ export default function UserList({}: Props) {
     if (data.id && user) {
       userId = user.id!;
     }
-    await UserService.updateUser(data, userId)
-      .then((res) => {
-        console.log(res);
-        setUserList((prev) => [...prev, res]);
-        setShowModal(false);
-        getListUser();
-        toast.success("Cập nhật thành công");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Cập nhật thất bại");
-      });
+    const response = await UserService.updateUser(data, userId);
+    if (HttpStatusCode.Ok) {
+      setUserList((prev) => [...prev, response]);
+      setShowModal(false);
+      getListUser();
+      toast.success("Cập nhật thành công");
+    } else {
+      toast.error("Cập nhật thất bại");
+    }
   };
 
   const handleDelete = (id: number) => {
@@ -89,17 +89,15 @@ export default function UserList({}: Props) {
   };
 
   const submitItem = async (data: User) => {
-    await UserService.createUser(data)
-      .then((res) => {
-        console.log(res);
-        setUserList((prev) => [...prev, res]);
-        setShowModalCreate(false);
-        toast.success("Thêm Thành công");
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Thêm Thất bại");
-      });
+    const response = await UserService.createUser(data);
+    if (HttpStatusCode.Ok) {
+      setUserList((prev) => [...prev, response]);
+      setShowModalCreate(false);
+      getListUser();
+      toast.success("Thêm Thành công");
+    } else {
+      toast.error("Thêm Thất bại");
+    }
   };
 
   const handleDetail = (id: number) => {
@@ -124,7 +122,7 @@ export default function UserList({}: Props) {
       <ContentHeader
         title="Quản lý nhân viên"
         titleCreate="Thêm nhân viên"
-        handleModalUpdate={handleModalCreate}
+        handleModalCreate={handleModalCreate}
         handleModalExport={handleModalExport}
       />
       <div className="mx-5 mt-4">
