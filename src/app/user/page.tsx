@@ -29,17 +29,17 @@ export default function UserList({}: Props) {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
   const [itemId, setItemId] = useState(0);
-  const [numberOfElements, setNumberOfElements] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     getListUser();
-  }, []);
+  }, [currentPage]);
 
   const getListUser = async () => {
-    const response = await UserService.getList();
+    const response = await UserService.getList(currentPage);
     setUserList(response.data.data);
-    setNumberOfElements(response.data.numberOfElements);
+    setCurrentPage(response.data.currentPage);
     setTotalPages(response.data.totalPages);
   };
 
@@ -110,6 +110,13 @@ export default function UserList({}: Props) {
     }
   };
 
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page - 1);
+  };
+
   const handleModalCreate = () => {
     setShowModalCreate(true);
   };
@@ -139,7 +146,8 @@ export default function UserList({}: Props) {
           <div className="flex justify-end p-3">
             <Pagination
               count={totalPages}
-              page={numberOfElements}
+              page={currentPage + 1}
+              onChange={handlePageChange}
               variant="outlined"
               color="primary"
             />

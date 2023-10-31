@@ -1,9 +1,11 @@
 import User from "@/types/User";
 import http from "./http";
-import { ApiResponse, DataListResponse } from "./ApiResponse";
+import { DataListResponse } from "./ApiResponse";
 
-const getList = async () => {
-  const getData = await http.get<DataListResponse<User>>("/users");
+const getList = async (currentPage: number) => {
+  const getData = await http.get<DataListResponse<User>>(
+    `/users?page=${currentPage}`
+  );
   return getData;
 };
 
