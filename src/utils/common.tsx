@@ -17,3 +17,5 @@ export const closeModal = (changeShow: Function) => {
     changeShow(false);
   }
 };
+
+

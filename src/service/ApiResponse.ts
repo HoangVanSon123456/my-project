@@ -1,10 +1,6 @@
-export interface Paging {
+export interface DataListResponse<T> {
+  data: T[];
   totalElements: number;
   totalPages: number;
   numberOfElements: number;
-}
-
-export interface DataListResponse<T> {
-  items: T[];
-  pagination: Paging;
 }

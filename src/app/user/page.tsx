@@ -25,19 +25,19 @@ export default function UserList({}: Props) {
   const [user, setUser] = useState<User>();
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
-
   const [itemId, setItemId] = useState(0);
+  const [numberOfElements, setNumberOfElements] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     getListUser();
   }, []);
 
   const getListUser = async () => {
-    await UserService.getList()
-      .then((res) => {
-        setUserList(res.data.data);
-      })
-      .catch((err) => console.log(err));
+    const response = await UserService.getList();
+    setUserList(response.data.data);
+    setNumberOfElements(response.data.numberOfElements);
+    setTotalPages(response.data.totalPages);
   };
 
   const updateItem = async (data: User) => {
@@ -139,7 +139,12 @@ export default function UserList({}: Props) {
             handleDetail={handleDetail}
           />
           <div className="flex justify-end p-3">
-            <Pagination count={10} variant="outlined" color="primary" />
+            <Pagination
+              count={totalPages}
+              page={numberOfElements}
+              variant="outlined"
+              color="primary"
+            />
           </div>
         </div>
       </div>
