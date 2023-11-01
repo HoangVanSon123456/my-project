@@ -3,14 +3,12 @@ import React from "react";
 type Props = {
   title: string;
   titleCreate: string;
-  handleModalExport: Function;
   handleModalCreate: Function;
 };
 
 export default function ContentHeader({
   title,
   titleCreate,
-  handleModalExport,
   handleModalCreate,
 }: Props) {
   return (
@@ -29,7 +27,6 @@ export default function ContentHeader({
         <button
           type="button"
           className="text-gray-700 hover:text-white border border-gray-800 hover:bg-gray-900 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          onClick={() => handleModalExport()}
         >
           Xuất tài liệu
         </button>

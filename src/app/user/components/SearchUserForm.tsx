@@ -73,6 +73,20 @@ export default function SearchUserFrom({}: Props) {
               </select>
             </div>
           </div>
+          <div className="flex justify-center mt-4">
+            <button
+              type="button"
+              className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 mb-2"
+            >
+              Reset
+            </button>
+            <button
+              type="button"
+              className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2"
+            >
+              Tìm kiếm
+            </button>
+          </div>
         </form>
       </div>
     </section>

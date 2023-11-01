@@ -13,8 +13,8 @@ import ModalUserCreate from "./components/ModalUserCreate";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ModalUserDetail from "./components/ModalUserDetail";
-import dynamic from "next/dynamic";
 import { HttpStatusCode } from "axios";
+import PaginationTable from "@/components/PaginationTable";
 
 const ListUser = lazy(() => import("./components/ListUser"));
 
@@ -31,6 +31,7 @@ export default function UserList({}: Props) {
   const [itemId, setItemId] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
 
   useEffect(() => {
     getListUser();
@@ -41,6 +42,7 @@ export default function UserList({}: Props) {
     setUserList(response.data.data);
     setCurrentPage(response.data.currentPage);
     setTotalPages(response.data.totalPages);
+    setTotalElements(response.data.totalElements);
   };
 
   const updateItem = async (data: User) => {
@@ -121,16 +123,12 @@ export default function UserList({}: Props) {
     setShowModalCreate(true);
   };
 
-  const handleModalExport = () => {
-    setShowModalExport(true);
-  };
   return (
     <>
       <ContentHeader
         title="Quản lý nhân viên"
         titleCreate="Thêm nhân viên"
         handleModalCreate={handleModalCreate}
-        handleModalExport={handleModalExport}
       />
       <div className="mx-5 mt-4">
         <SearchUserFrom />
@@ -143,13 +141,12 @@ export default function UserList({}: Props) {
             handleUpdate={handleUpdate}
             handleDetail={handleDetail}
           />
-          <div className="flex justify-end p-3">
-            <Pagination
-              count={totalPages}
-              page={currentPage + 1}
-              onChange={handlePageChange}
-              variant="outlined"
-              color="primary"
+          <div className="p-3">
+            <PaginationTable
+              totalPage={totalPages}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+              countItem={totalElements}
             />
           </div>
         </div>
@@ -164,10 +161,6 @@ export default function UserList({}: Props) {
         showModalCreate={showModalCreate}
         submitItem={submitItem}
         changeShow={(s: boolean) => setShowModalCreate(s)}
-      />
-      <ModalExportFile
-        showModalExport={showModalExport}
-        changeShow={(s: boolean) => setShowModalExport(s)}
       />
       <ModalDelete
         showModalDelete={showModalDelete}

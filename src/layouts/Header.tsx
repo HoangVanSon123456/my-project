@@ -25,7 +25,6 @@ export default function Header({}: Props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleClickLanguage = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl2(event.currentTarget);
   };
@@ -42,7 +41,7 @@ export default function Header({}: Props) {
           aria-expanded={open2 ? "true" : undefined}
           variant="text"
           disableElevation
-          onMouseEnter={handleClickLanguage}
+          onClick={handleClickLanguage}
         >
           <Image src={IconVietNam} alt="" width={30} height={30} />
         </Button>
@@ -98,7 +97,7 @@ export default function Header({}: Props) {
             aria-expanded={open ? "true" : undefined}
             variant="text"
             disableElevation
-            onMouseEnter={handleClick}
+            onClick={handleClick}
             endIcon={<KeyboardArrowDownIcon />}
             sx={{ color: "#5a5a5a" }}
           >

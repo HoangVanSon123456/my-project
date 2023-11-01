@@ -5,8 +5,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Navbar from "@/layouts/Navbar";
 import Footer from "@/layouts/Footer";
-import Layout from "@/layouts/Layout";
 import ToastNotification from "@/components/ToastNotification";
+import { lazy } from "react";
+
+const Layout = lazy(() => import("@/layouts/Layout"));
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +23,7 @@ export default function UserLayout({
   children: React.ReactNode;
 }) {
   return (
-    // <html lang="en">
+    //   <html lang="en">
     //   <body className={inter.className}>
     //     <div className="grid grid-cols-6">
     //       <div className="bg-white col-span-1 min-h-screen">
@@ -37,12 +39,8 @@ export default function UserLayout({
     //     </div>
     //   </body>
     // </html>
-    <html lang="en">
-      <body className={inter.className}>
-        <Layout>
-          {children} <ToastNotification />
-        </Layout>
-      </body>
-    </html>
+    <Layout>
+      {children} <ToastNotification />
+    </Layout>
   );
 }
