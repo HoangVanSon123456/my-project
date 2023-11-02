@@ -3,8 +3,6 @@ import React, { lazy, useEffect, useState } from "react";
 import ModalUserUpdate from "./components/ModalUserUpdate";
 import UserService from "@/service/UserService";
 import User from "@/types/User";
-import ModalExportFile from "@/components/ModalExportFile";
-import { Pagination } from "@mui/material";
 import SearchUserFrom from "./components/SearchUserForm";
 import ModalDelete from "@/components/ModalDelete";
 import ContentHeader from "@/components/ContentHeader";
@@ -21,11 +19,10 @@ const ListUser = lazy(() => import("./components/ListUser"));
 type Props = {};
 
 export default function UserList({}: Props) {
-  const [showModal, setShowModal] = useState(false);
-  const [showModalExport, setShowModalExport] = useState(false);
-  const [showModalCreate, setShowModalCreate] = useState(false);
   const [userList, setUserList] = useState<User[]>([]);
   const [user, setUser] = useState<User>();
+  const [showModal, setShowModal] = useState(false);
+  const [showModalCreate, setShowModalCreate] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
   const [itemId, setItemId] = useState(0);
@@ -113,12 +110,23 @@ export default function UserList({}: Props) {
   };
 
   const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
     setCurrentPage(page - 1);
   };
 
+  const handleSearchUser = async (keyword: string) => {
+    const response = await UserService.searchUser(keyword);
+    if (HttpStatusCode.Ok) {
+      setUserList(response.data);
+      setCurrentPage(response.currentPage);
+      setTotalPages(response.totalPages);
+      setTotalElements(response.totalElements);
+    } else {
+      console.log("error");
+    }
+  };
   const handleModalCreate = () => {
     setShowModalCreate(true);
   };
@@ -131,7 +139,10 @@ export default function UserList({}: Props) {
         handleModalCreate={handleModalCreate}
       />
       <div className="mx-5 mt-4">
-        <SearchUserFrom />
+        <SearchUserFrom
+          handleSearchUser={handleSearchUser}
+          getListUser={getListUser}
+        />
       </div>
       <div className="mx-5 mt-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

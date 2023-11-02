@@ -29,12 +29,18 @@ const getUserById = async (id: number) => {
   return data;
 };
 
+const searchUser = async (keyword: string) => {
+  const { data } = await http.get(`/search/user?search=${keyword}`);
+  return data;
+};
+
 const UserService = {
   getList,
   createUser,
   deleteUser,
   updateUser,
   getUserById,
+  searchUser,
 };
 
 export default UserService;

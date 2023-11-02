@@ -51,18 +51,18 @@ export default function ModalUserUpdate({
           boxShadow: "lg",
         }}
       >
-        <ModalClose variant="plain" sx={{ m: 1 }} />
-        <Typography
-          component="h2"
-          id="modal-title"
-          level="h3"
-          textColor="inherit"
-          fontWeight="lg"
-          mb={2}
-        >
-          Cập nhật nhân viên
-        </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <ModalClose variant="plain" sx={{ m: 1 }} />
+          <Typography
+            component="h2"
+            id="modal-title"
+            level="h3"
+            textColor="inherit"
+            fontWeight="lg"
+            mb={2}
+          >
+            Cập nhật nhân viên
+          </Typography>
           <div className="grid mb-4">
             <div className="relative z-0 w-full group">
               <label
@@ -73,7 +73,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="text"
-                id="firstName"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 placeholder="Nhập tên"
                 {...register("fullName")}
@@ -90,7 +89,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="text"
-                id="firstName"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Nhập tên"
                 {...register("firstName")}
@@ -105,7 +103,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="text"
-                id="lastName"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Nhập họ"
                 {...register("lastName")}
@@ -122,7 +119,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="text"
-                id="userName"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Nhập tên tài khoản"
                 {...register("userName")}
@@ -137,7 +133,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="password"
-                id="password"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Nhập mật khẩu"
                 {...register("password")}
@@ -154,7 +149,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="text"
-                id="email"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Nhập email"
                 {...register("email")}
@@ -169,7 +163,6 @@ export default function ModalUserUpdate({
               </label>
               <input
                 type="text"
-                id="address"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
                 placeholder="Nhập địa chỉ"
                 {...register("address")}
@@ -182,25 +175,9 @@ export default function ModalUserUpdate({
                 htmlFor="item-weight"
                 className="block mb-2 text-sm font-medium text-gray-600"
               >
-                Số điện thoại
-              </label>
-              <input
-                type="text"
-                id="phone"
-                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                placeholder="Nhập số điện thoại"
-                {...register("phone")}
-              />
-            </div>
-            <div className="relative z-0 w-full mb-4 group">
-              <label
-                htmlFor="item-weight"
-                className="block mb-2 text-sm font-medium text-gray-600"
-              >
                 Trạng thái
               </label>
               <select
-                id="status"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5"
                 {...register("status")}
               >
@@ -208,6 +185,20 @@ export default function ModalUserUpdate({
                 <option value="2">Không hoạt động</option>
                 <option value="3">Khóa tài khoản</option>
               </select>
+            </div>
+            <div className="relative z-0 w-full mb-4 group">
+              <label
+                htmlFor="item-weight"
+                className="block mb-2 text-sm font-medium text-gray-600"
+              >
+                Số điện thoại
+              </label>
+              <input
+                type="text"
+                className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
+                placeholder="Nhập số điện thoại"
+                {...register("phone")}
+              />
             </div>
           </div>
           <button

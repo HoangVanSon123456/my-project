@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import IconFoodLogo from "../../public/IconFoodLogo.png";
 import Image from "next/image";
