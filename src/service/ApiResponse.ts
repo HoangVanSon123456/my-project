@@ -1,8 +1,13 @@
+export interface Paging {
+  pageNumber: number;
+  pageSize: number;
+  totalElements: number;
+  totalPage: number;
+}
+
 export interface DataListResponse<T> {
   data: T[];
-  totalElements: number;
-  totalPages: number;
-  currentPage: number;
+  pageableInfo: Paging;
 }
 
 export interface ApiResponse<T> {

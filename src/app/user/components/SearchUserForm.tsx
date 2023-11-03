@@ -2,30 +2,27 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import SearchUser from "../types";
 
-type Props = { handleSearchUser: Function; getListUser: Function };
+type Props = { handleSearch: Function; getListUser: Function };
 
-export default function SearchUserFrom({
-  handleSearchUser,
-  getListUser,
-}: Props) {
-  const { register, handleSubmit, reset } = useForm();
+export default function SearchUserFrom({ handleSearch, getListUser }: Props) {
+  const { register, handleSubmit, reset } = useForm<SearchUser>();
 
   const onSubmit = (data: SearchUser) => {
-    if (handleSearchUser) {
-      handleSearchUser(
-        data.fullName! + data.userName + data.phone + data.email
-      );
+    console.log(data);
+    if (handleSearch) {
+      data.value = data.value?.trim();
+      handleSearch(data);
     }
   };
 
   const handleResetForm = () => {
-    reset({
-      fullName: "",
-      userName: "",
-      phone: "",
-      email: "",
-    });
     getListUser();
+    reset({
+      value: "",
+      // userName: "",
+      // phone: "",
+      // email: "",
+    });
   };
 
   return (
@@ -48,10 +45,10 @@ export default function SearchUserFrom({
                 id="fullName"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
                 placeholder="VD: Hoàng Văn Sơn"
-                {...register("fullName")}
+                {...register("value")}
               />
             </div>
-            <div className="">
+            {/* <div className="">
               <label
                 htmlFor="name"
                 className="block mb-2 text-sm font-medium text-gray-600"
@@ -95,19 +92,19 @@ export default function SearchUserFrom({
                 placeholder="VD: hoangvanson@gmail.com,..."
                 {...register("email")}
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex justify-center mt-4">
             <button
               type="button"
-              className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 mb-2"
+              className="text-red-700 hover:text-white border border-red-700 hover:bg-red-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 mb-1"
               onClick={handleResetForm}
             >
               Reset
             </button>
             <button
               type="submit"
-              className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-2"
+              className="text-green-700 hover:text-white border border-green-700 hover:bg-green-800  font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-1"
             >
               Tìm kiếm
             </button>

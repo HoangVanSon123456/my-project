@@ -1,13 +1,7 @@
 import User from "@/types/User";
 import http from "./http";
 import { DataListResponse } from "./ApiResponse";
-
-const getList = async (currentPage: number) => {
-  const getData = await http.get<DataListResponse<User>>(
-    `/users?page=${currentPage}`
-  );
-  return getData;
-};
+import SearchUser from "@/app/user/types";
 
 const createUser = async (param: User) => {
   const { data } = await http.post("/create/user", param);
@@ -29,13 +23,12 @@ const getUserById = async (id: number) => {
   return data;
 };
 
-const searchUser = async (keyword: string) => {
-  const { data } = await http.get(`/search/user?search=${keyword}`);
+const searchUser = async (param: SearchUser) => {
+  const { data } = await http.post<DataListResponse<User>>(`/find`, param);
   return data;
 };
 
 const UserService = {
-  getList,
   createUser,
   deleteUser,
   updateUser,

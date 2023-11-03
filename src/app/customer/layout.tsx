@@ -18,6 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <title>Quản lý khách hàng</title>
       <body className={inter.className}>
         <Layout>{children}</Layout>
       </body>

@@ -26,7 +26,7 @@ export default function PaginationTable({
         {totalPage > 1 && (
           <Pagination
             count={totalPage}
-            page={currentPage + 1}
+            page={currentPage}
             variant="outlined"
             color="primary"
             onChange={onChange}

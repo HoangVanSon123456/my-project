@@ -1,6 +1,3 @@
-export default interface SearchUser {
-  fullName?: string;
-  userName?: string;
-  phone?: string;
-  email?: string;
-}
+import { BaseSearch } from "@/service/Pagination";
+
+export default interface SearchUser extends BaseSearch {}

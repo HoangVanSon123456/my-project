@@ -13,6 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ModalUserDetail from "./components/ModalUserDetail";
 import { HttpStatusCode } from "axios";
 import PaginationTable from "@/components/PaginationTable";
+import SearchUser from "./types";
+import { PAGINATION, Paging } from "@/service/Pagination";
 
 const ListUser = lazy(() => import("./components/ListUser"));
 
@@ -26,20 +28,19 @@ export default function UserList({}: Props) {
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [showModalDetail, setShowModalDetail] = useState(false);
   const [itemId, setItemId] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [totalElements, setTotalElements] = useState(0);
+  const [page, setPage] = useState<Paging>(PAGINATION);
+  const [searchParam, setSearchParam] = useState<SearchUser>({});
 
   useEffect(() => {
     getListUser();
-  }, [currentPage]);
+  }, [searchParam]);
 
   const getListUser = async () => {
-    const response = await UserService.getList(currentPage);
-    setUserList(response.data.data);
-    setCurrentPage(response.data.currentPage);
-    setTotalPages(response.data.totalPages);
-    setTotalElements(response.data.totalElements);
+    const response = await UserService.searchUser(searchParam);
+    if (HttpStatusCode.Ok) {
+      setUserList(response.data);
+      setPage(response.pageableInfo);
+    }
   };
 
   const updateItem = async (data: User) => {
@@ -113,20 +114,14 @@ export default function UserList({}: Props) {
     _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    setCurrentPage(page - 1);
+    console.log(page);
+    setSearchParam({ ...searchParam, page: page - 1 });
   };
 
-  const handleSearchUser = async (keyword: string) => {
-    const response = await UserService.searchUser(keyword);
-    if (HttpStatusCode.Ok) {
-      setUserList(response.data);
-      setCurrentPage(response.currentPage);
-      setTotalPages(response.totalPages);
-      setTotalElements(response.totalElements);
-    } else {
-      console.log("error");
-    }
+  const handleSearch = (data: SearchUser) => {
+    setSearchParam({ ...searchParam, ...data });
   };
+
   const handleModalCreate = () => {
     setShowModalCreate(true);
   };
@@ -139,10 +134,7 @@ export default function UserList({}: Props) {
         handleModalCreate={handleModalCreate}
       />
       <div className="mx-5 mt-4">
-        <SearchUserFrom
-          handleSearchUser={handleSearchUser}
-          getListUser={getListUser}
-        />
+        <SearchUserFrom handleSearch={handleSearch} getListUser={getListUser} />
       </div>
       <div className="mx-5 mt-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -154,10 +146,10 @@ export default function UserList({}: Props) {
           />
           <div className="p-3">
             <PaginationTable
-              totalPage={totalPages}
-              currentPage={currentPage}
+              totalPage={page.totalPage}
+              currentPage={page.pageNumber + 1}
               handlePageChange={handlePageChange}
-              countItem={totalElements}
+              countItem={page.totalElements}
             />
           </div>
         </div>
