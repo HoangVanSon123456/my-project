@@ -2,27 +2,28 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import SearchUser from "../types";
 
-type Props = { handleSearch: Function; getListUser: Function };
+type Props = {
+  handleSearch: Function;
+  handleReset: Function;
+};
 
-export default function SearchUserFrom({ handleSearch, getListUser }: Props) {
+export default function SearchUserFrom({ handleSearch, handleReset }: Props) {
   const { register, handleSubmit, reset } = useForm<SearchUser>();
 
   const onSubmit = (data: SearchUser) => {
-    console.log(data);
     if (handleSearch) {
-      data.value = data.value?.trim();
       handleSearch(data);
     }
   };
 
   const handleResetForm = () => {
-    getListUser();
     reset({
-      value: "",
-      // userName: "",
-      // phone: "",
-      // email: "",
+      fullName: " ",
+      userName: " ",
+      phone: " ",
+      email: " ",
     });
+    handleReset();
   };
 
   return (
@@ -45,10 +46,10 @@ export default function SearchUserFrom({ handleSearch, getListUser }: Props) {
                 id="fullName"
                 className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
                 placeholder="VD: Hoàng Văn Sơn"
-                {...register("value")}
+                {...register("fullName")}
               />
             </div>
-            {/* <div className="">
+            <div className="">
               <label
                 htmlFor="name"
                 className="block mb-2 text-sm font-medium text-gray-600"
@@ -92,7 +93,7 @@ export default function SearchUserFrom({ handleSearch, getListUser }: Props) {
                 placeholder="VD: hoangvanson@gmail.com,..."
                 {...register("email")}
               />
-            </div> */}
+            </div>
           </div>
           <div className="flex justify-center mt-4">
             <button

@@ -13,6 +13,5 @@ export const PAGINATION = {
 };
 
 export interface BaseSearch {
-  value?: string;
   page?: number;
 }

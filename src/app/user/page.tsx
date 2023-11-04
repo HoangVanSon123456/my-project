@@ -37,9 +37,11 @@ export default function UserList({}: Props) {
 
   const getListUser = async () => {
     const response = await UserService.searchUser(searchParam);
-    if (HttpStatusCode.Ok) {
+    if ((response.message = "Thành công")) {
       setUserList(response.data);
       setPage(response.pageableInfo);
+    } else {
+      toast.error("Lỗi xảy ra!!!");
     }
   };
 
@@ -54,8 +56,6 @@ export default function UserList({}: Props) {
       setShowModal(false);
       getListUser();
       toast.success("Cập nhật thành công");
-    } else {
-      toast.error("Cập nhật thất bại");
     }
   };
 
@@ -114,16 +114,20 @@ export default function UserList({}: Props) {
     _event: React.ChangeEvent<unknown>,
     page: number
   ) => {
-    console.log(page);
     setSearchParam({ ...searchParam, page: page - 1 });
   };
 
-  const handleSearch = (data: SearchUser) => {
-    setSearchParam({ ...searchParam, ...data });
+  const handleSearch = (data: SearchUser, page: number) => {
+    setSearchParam({ ...searchParam, ...data, page: page - 1 });
   };
 
   const handleModalCreate = () => {
     setShowModalCreate(true);
+  };
+
+  const handleReset = () => {
+    setSearchParam({ fullName: " ", userName: " ", phone: " ", email: " " });
+    getListUser();
   };
 
   return (
@@ -134,7 +138,7 @@ export default function UserList({}: Props) {
         handleModalCreate={handleModalCreate}
       />
       <div className="mx-5 mt-4">
-        <SearchUserFrom handleSearch={handleSearch} getListUser={getListUser} />
+        <SearchUserFrom handleSearch={handleSearch} handleReset={handleReset} />
       </div>
       <div className="mx-5 mt-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

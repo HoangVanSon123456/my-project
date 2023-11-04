@@ -8,6 +8,7 @@ export interface Paging {
 export interface DataListResponse<T> {
   data: T[];
   pageableInfo: Paging;
+  message: string;
 }
 
 export interface ApiResponse<T> {
