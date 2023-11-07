@@ -1,20 +1,20 @@
 "use client";
-import React, { lazy, useEffect, useState } from "react";
-import ModalUserUpdate from "./components/ModalUserUpdate";
+import ContentHeader from "@/components/ContentHeader";
+import ModalDelete from "@/components/ModalDelete";
+import PaginationTable from "@/components/PaginationTable";
+import { PAGINATION, Paging } from "@/service/Pagination";
 import UserService from "@/service/UserService";
 import User from "@/types/User";
-import SearchUserFrom from "./components/SearchUserForm";
-import ModalDelete from "@/components/ModalDelete";
-import ContentHeader from "@/components/ContentHeader";
+import { HttpStatusCode } from "axios";
 import { find } from "lodash";
-import ModalUserCreate from "./components/ModalUserCreate";
+import React, { lazy, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ModalUserCreate from "./components/ModalUserCreate";
 import ModalUserDetail from "./components/ModalUserDetail";
-import { HttpStatusCode } from "axios";
-import PaginationTable from "@/components/PaginationTable";
+import ModalUserUpdate from "./components/ModalUserUpdate";
+import SearchUserFrom from "./components/SearchUserForm";
 import SearchUser from "./types";
-import { PAGINATION, Paging } from "@/service/Pagination";
 
 const ListUser = lazy(() => import("./components/ListUser"));
 
@@ -126,7 +126,7 @@ export default function UserList({}: Props) {
   };
 
   const handleReset = () => {
-    setSearchParam({ fullName: " ", userName: " ", phone: " ", email: " " });
+    setSearchParam({ value: "", page: 0 });
     getListUser();
   };
 

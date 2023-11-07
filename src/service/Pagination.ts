@@ -14,4 +14,5 @@ export const PAGINATION = {
 
 export interface BaseSearch {
   page?: number;
+  value?: string;
 }

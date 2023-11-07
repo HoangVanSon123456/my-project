@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "tailwindcss"
-    ]
+        
+    ],
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    }
 }
