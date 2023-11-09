@@ -1,19 +1,19 @@
 "use client";
-import { Button, Menu, MenuItem } from "@mui/material";
-import React from "react";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import IconVietNam from "../../public/vietnam-flag-icon.svg";
-import IconEnglish from "../../public/united-kingdom-flag-icon.svg";
-import Image from "next/image";
-import ImageLogo from "../../public/full-m2H7K9N4A0d3Z5d3.png";
-import LogoutIcon from "@mui/icons-material/Logout";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import ListIcon from "@mui/icons-material/List";
+import DehazeIcon from "@mui/icons-material/Dehaze";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import LogoutIcon from "@mui/icons-material/Logout";
+import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import { Button, Menu, MenuItem } from "@mui/material";
+import Image from "next/image";
+import React from "react";
+import ImageLogo from "../../public/full-m2H7K9N4A0d3Z5d3.png";
+import IconEnglish from "../../public/united-kingdom-flag-icon.svg";
+import IconVietNam from "../../public/vietnam-flag-icon.svg";
 
-type Props = {};
+type Props = { isNavbar: Boolean };
 
-export default function Header({}: Props) {
+export default function Header({ isNavbar }: Props) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const [anchorE2, setAnchorEl2] = React.useState<null | HTMLElement>(null);
@@ -32,8 +32,12 @@ export default function Header({}: Props) {
     setAnchorEl2(null);
   };
   return (
-    <div className="">
-      <div className="flex items-center">
+    <div className="flex justify-between items-center py-2">
+      <button>
+        <DehazeIcon sx={{ marginLeft: "15px" }} />
+      </button>
+      <div className=""></div>
+      <div className="flex justify-center items-center ">
         <Button
           id="demo-customized-button"
           aria-controls={open2 ? "demo-customized-menu" : undefined}

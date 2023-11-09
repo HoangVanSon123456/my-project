@@ -1,14 +1,13 @@
-import React from "react";
-import Modal from "@mui/joy/Modal";
-import ModalClose from "@mui/joy/ModalClose";
-import Typography from "@mui/joy/Typography";
-import Sheet from "@mui/joy/Sheet";
-import { useForm } from "react-hook-form";
+import { COMMON_MESSAGE } from "@/constants/common";
 import User from "@/types/User";
 import { closeModal } from "@/utils/common";
-import * as yup from "yup";
-import { COMMON_MESSAGE } from "@/constants/common";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Modal from "@mui/joy/Modal";
+import ModalClose from "@mui/joy/ModalClose";
+import Sheet from "@mui/joy/Sheet";
+import Typography from "@mui/joy/Typography";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
 type Props = {
   showModalCreate: boolean;

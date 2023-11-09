@@ -37,7 +37,7 @@ export default function SearchUserFrom({ handleSearch, handleReset }: Props) {
             <input
               type="text"
               className="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2"
-              placeholder="VD: 0123456789,..."
+              placeholder="Nhập số điện thoại tìm kiếm"
               {...register("value")}
             />
           </div>

@@ -1,9 +1,8 @@
 import User, { Status } from "@/types/User";
 import { getFieldHtml } from "@/utils/common";
-import React from "react";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DetailsOutlinedIcon from "@mui/icons-material/DetailsOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 type Props = {
   userList: User[];
@@ -31,16 +30,7 @@ export default function ListUser({
         <thead className="text-xs text-gray-600 uppercase bg-gray-50 ">
           <tr>
             <th scope="col" className="p-4">
-              <div className="flex items-center">
-                <input
-                  id="checkbox-all-search"
-                  type="checkbox"
-                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <label htmlFor="checkbox-all-search" className="sr-only">
-                  checkbox
-                </label>
-              </div>
+              STT
             </th>
             <th scope="col" className="px-6 py-3">
               Họ và tên
@@ -58,26 +48,15 @@ export default function ListUser({
             <th scope="col" className="px-6 py-3">
               Số điện thoại
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 text-left">
               Action
             </th>
           </tr>
         </thead>
         <tbody>
-          {userList.map((user: User) => (
+          {userList.map((user: User, index: number) => (
             <tr className="bg-white border-b" key={user.id}>
-              <td className="w-4 p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-table-search-1"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label htmlFor="checkbox-table-search-1" className="sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </td>
+              <td className="w-4 p-4">{index + 1}</td>
               <th
                 scope="row"
                 className="px-6 py-4 font-medium text-gray-600 whitespace-nowrap"
@@ -91,7 +70,7 @@ export default function ListUser({
                 {getFieldHtml(Status, user.status!)}
               </td>
               <td className="px-6 py-4">{user.phone}</td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-4 text-left">
                 <button onClick={() => handleEditItem(user.id!)}>
                   <EditOutlinedIcon sx={{ color: "#2E34E6" }} />
                 </button>
